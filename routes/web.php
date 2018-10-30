@@ -35,6 +35,14 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/categoria/activar', 'CategoriaController@activar');
         Route::get('/categoria/selectCategoria', 'CategoriaController@selectCategoria');
 
+        Route::get('/ordencompra', 'OrdenCompraController@index');
+        Route::post('/ordencompra/registrar', 'OrdenCompraController@store');
+        Route::put('/ordencompra/actualizar', 'OrdenCompraController@update');
+        Route::put('/ordencompra/desactivar', 'OrdenCompraController@desactivar');
+        Route::put('/ordencompra/activar', 'OrdenCompraController@activar');
+        Route::get('/ordencompra/selectOrdenCompra', 'OrdenCompraController@selectOrdenCompra');
+
+
         Route::get('/articulo', 'ArticuloController@index');
         Route::post('/articulo/registrar', 'ArticuloController@store');
         Route::put('/articulo/actualizar', 'ArticuloController@update');
@@ -63,6 +71,14 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/cliente/actualizar', 'ClienteController@update');
         Route::get('/cliente/selectCliente', 'ClienteController@selectCliente');
 
+        Route::get('/ordencompra', 'OrdenCompraController@index');
+        Route::post('/ordencompra/registrar', 'OrdenCompraController@store');
+        Route::put('/ordencompra/actualizar', 'OrdenCompraController@update');
+        Route::put('/ordencompra/desactivar', 'OrdenCompraController@desactivar');
+        Route::put('/ordencompra/activar', 'OrdenCompraController@activar');
+        Route::get('/ordencompra/selectOrdenCompra', 'OrdenCompraController@selectOrdenCompra');
+
+
         Route::get('/articulo/buscarArticuloVenta', 'ArticuloController@buscarArticuloVenta');
         Route::get('/articulo/listarArticuloVenta', 'ArticuloController@listarArticuloVenta');
 
@@ -76,6 +92,13 @@ Route::group(['middleware'=>['auth']],function(){
 
     Route::group(['middleware' => ['Administrador']], function () {
         
+        Route::get('/ordencompra', 'OrdenCompraController@index');
+        Route::post('/ordencompra/registrar', 'OrdenCompraController@store');
+        Route::put('/ordencompra/actualizar', 'OrdenCompraController@update');
+        Route::put('/ordencompra/desactivar', 'OrdenCompraController@desactivar');
+        Route::put('/ordencompra/activar', 'OrdenCompraController@activar');
+        Route::get('/ordencompra/selectOrdenCompra', 'OrdenCompraController@selectOrdenCompra');
+
         Route::get('/categoria', 'CategoriaController@index');
         Route::post('/categoria/registrar', 'CategoriaController@store');
         Route::put('/categoria/actualizar', 'CategoriaController@update');
