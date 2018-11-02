@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-10-2018 a las 06:05:12
--- Versión del servidor: 10.1.31-MariaDB
--- Versión de PHP: 7.2.4
+-- Tiempo de generación: 30-10-2018 a las 12:39:39
+-- Versión del servidor: 10.1.36-MariaDB
+-- Versión de PHP: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -271,7 +271,7 @@ INSERT INTO `notifications` (`id`, `type`, `notifiable_id`, `notifiable_type`, `
 ('18976400-e90c-4d79-a38b-a4fcb436edcc', 'App\\Notifications\\NotifyAdmin', 5, 'App\\User', '{\"datos\":{\"ventas\":{\"numero\":0,\"msj\":\"Ventas\"},\"ingresos\":{\"numero\":1,\"msj\":\"Ingresos\"}}}', NULL, '2018-09-10 05:38:17', '2018-09-10 05:38:17'),
 ('250ff7aa-710e-4d8a-90a5-99ab17fdbbd1', 'App\\Notifications\\NotifyAdmin', 6, 'App\\User', '{\"datos\":{\"ventas\":{\"numero\":3,\"msj\":\"Ventas\"},\"ingresos\":{\"numero\":5,\"msj\":\"Ingresos\"}}}', '2018-09-10 05:45:36', '2018-09-10 04:27:01', '2018-09-10 05:45:36'),
 ('2f25b2d2-a00d-4b80-bd33-f131b8459584', 'App\\Notifications\\NotifyAdmin', 6, 'App\\User', '{\"datos\":{\"ventas\":{\"numero\":4,\"msj\":\"Ventas\"},\"ingresos\":{\"numero\":1,\"msj\":\"Ingresos\"}}}', NULL, '2018-09-10 22:04:12', '2018-09-10 22:04:12'),
-('30ff0cd5-e415-4569-8179-78e45a4f8a8c', 'App\\Notifications\\NotifyAdmin', 1, 'App\\User', '{\"datos\":{\"ventas\":{\"numero\":2,\"msj\":\"Ventas\"},\"ingresos\":{\"numero\":0,\"msj\":\"Ingresos\"}}}', NULL, '2018-10-26 17:53:50', '2018-10-26 17:53:50'),
+('30ff0cd5-e415-4569-8179-78e45a4f8a8c', 'App\\Notifications\\NotifyAdmin', 1, 'App\\User', '{\"datos\":{\"ventas\":{\"numero\":2,\"msj\":\"Ventas\"},\"ingresos\":{\"numero\":0,\"msj\":\"Ingresos\"}}}', '2018-10-27 12:29:27', '2018-10-26 17:53:50', '2018-10-27 12:29:27'),
 ('3634c8bf-f1df-4c88-9abc-5d55e744480c', 'App\\Notifications\\NotifyAdmin', 5, 'App\\User', '{\"datos\":{\"ventas\":{\"numero\":2,\"msj\":\"Ventas\"},\"ingresos\":{\"numero\":0,\"msj\":\"Ingresos\"}}}', NULL, '2018-10-26 17:53:51', '2018-10-26 17:53:51'),
 ('3d9eaa7c-3a19-4759-93e9-9f3a5d3b6d49', 'App\\Notifications\\NotifyAdmin', 1, 'App\\User', '{\"datos\":{\"ventas\":{\"numero\":4,\"msj\":\"Ventas\"},\"ingresos\":{\"numero\":5,\"msj\":\"Ingresos\"}}}', '2018-09-10 05:23:09', '2018-09-10 04:56:57', '2018-09-10 05:23:09'),
 ('3ee696e5-119e-4fbb-b5d8-72933c3dc7e9', 'App\\Notifications\\NotifyAdmin', 1, 'App\\User', '{\"datos\":{\"ventas\":{\"numero\":1,\"msj\":\"Ventas\"},\"ingresos\":{\"numero\":1,\"msj\":\"Ingresos\"}}}', '2018-10-26 17:51:23', '2018-09-10 05:46:11', '2018-10-26 17:51:23'),
@@ -279,7 +279,7 @@ INSERT INTO `notifications` (`id`, `type`, `notifiable_id`, `notifiable_type`, `
 ('4cd4dccf-82c1-4abb-a40b-61943fe08938', 'App\\Notifications\\NotifyAdmin', 6, 'App\\User', '{\"datos\":{\"ventas\":{\"numero\":4,\"msj\":\"Ventas\"},\"ingresos\":{\"numero\":5,\"msj\":\"Ingresos\"}}}', '2018-09-10 05:45:36', '2018-09-10 04:56:57', '2018-09-10 05:45:36'),
 ('684458fa-75ec-4a51-b06e-4c1dbd965273', 'App\\Notifications\\NotifyAdmin', 5, 'App\\User', '{\"datos\":{\"ventas\":{\"numero\":4,\"msj\":\"Ventas\"},\"ingresos\":{\"numero\":5,\"msj\":\"Ingresos\"}}}', NULL, '2018-09-10 04:56:57', '2018-09-10 04:56:57'),
 ('6ba62dfd-d568-43e0-a549-dd9fde0771f3', 'App\\Notifications\\NotifyAdmin', 5, 'App\\User', '{\"datos\":{\"ventas\":{\"numero\":2,\"msj\":\"Ventas\"},\"ingresos\":{\"numero\":1,\"msj\":\"Ingresos\"}}}', NULL, '2018-09-10 21:40:15', '2018-09-10 21:40:15'),
-('79dccaf7-e743-4197-b835-01ec67d1dbc0', 'App\\Notifications\\NotifyAdmin', 1, 'App\\User', '{\"datos\":{\"ventas\":{\"numero\":1,\"msj\":\"Ventas\"},\"ingresos\":{\"numero\":0,\"msj\":\"Ingresos\"}}}', NULL, '2018-10-26 17:53:48', '2018-10-26 17:53:48'),
+('79dccaf7-e743-4197-b835-01ec67d1dbc0', 'App\\Notifications\\NotifyAdmin', 1, 'App\\User', '{\"datos\":{\"ventas\":{\"numero\":1,\"msj\":\"Ventas\"},\"ingresos\":{\"numero\":0,\"msj\":\"Ingresos\"}}}', '2018-10-27 12:29:27', '2018-10-26 17:53:48', '2018-10-27 12:29:27'),
 ('8131e7e4-9496-4978-b7d1-d90e044985c4', 'App\\Notifications\\NotifyAdmin', 6, 'App\\User', '{\"datos\":{\"ventas\":{\"numero\":1,\"msj\":\"Ventas\"},\"ingresos\":{\"numero\":0,\"msj\":\"Ingresos\"}}}', NULL, '2018-10-26 17:53:49', '2018-10-26 17:53:49'),
 ('8576a7a5-54e7-42ae-adaa-ac0a5e167420', 'App\\Notifications\\NotifyAdmin', 6, 'App\\User', '{\"datos\":{\"ventas\":{\"numero\":3,\"msj\":\"Ventas\"},\"ingresos\":{\"numero\":3,\"msj\":\"Ingresos\"}}}', '2018-09-10 05:45:36', '2018-09-10 03:12:41', '2018-09-10 05:45:36'),
 ('873a7350-0270-45ca-9749-65722c670804', 'App\\Notifications\\NotifyAdmin', 1, 'App\\User', '{\"datos\":{\"ventas\":{\"numero\":0,\"msj\":\"Ventas\"},\"ingresos\":{\"numero\":1,\"msj\":\"Ingresos\"}}}', '2018-10-26 17:51:23', '2018-09-10 05:38:17', '2018-10-26 17:51:23'),
@@ -310,11 +310,19 @@ CREATE TABLE `orden_compra` (
   `id` int(11) NOT NULL,
   `numero` int(11) NOT NULL,
   `nombre` varchar(500) NOT NULL,
-  `fecha` datetime NOT NULL,
+  `fecha` varchar(500) NOT NULL,
   `direccion` varchar(500) NOT NULL,
   `descripcion` varchar(500) NOT NULL,
-  `referencia` varchar(500) NOT NULL
+  `referencia` varchar(500) NOT NULL,
+  `condicion` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `orden_compra`
+--
+
+INSERT INTO `orden_compra` (`id`, `numero`, `nombre`, `fecha`, `direccion`, `descripcion`, `referencia`, `condicion`) VALUES
+(1, 56, 'OD 056 COMPRA DE MATERIALES', '16-18-2018', 'AV.', 'COMPRA DE MATERIALES', 'MEGATEK', '1');
 
 -- --------------------------------------------------------
 
@@ -625,7 +633,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `orden_compra`
 --
 ALTER TABLE `orden_compra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `personas`

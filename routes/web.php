@@ -78,7 +78,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/ordencompra/activar', 'OrdenCompraController@activar');
         Route::get('/ordencompra/selectOrdenCompra', 'OrdenCompraController@selectOrdenCompra');
 
-
+        
         Route::get('/articulo/buscarArticuloVenta', 'ArticuloController@buscarArticuloVenta');
         Route::get('/articulo/listarArticuloVenta', 'ArticuloController@listarArticuloVenta');
 
@@ -148,6 +148,8 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/ingreso/desactivar', 'IngresoController@desactivar');
         Route::get('/ingreso/obtenerCabecera', 'IngresoController@obtenerCabecera');
         Route::get('/ingreso/obtenerDetalles', 'IngresoController@obtenerDetalles');
+
+        
     });
 
 });

@@ -95,7 +95,7 @@ class VentaController extends Controller
         $numventa=Venta::select('num_comprobante')->where('id',$id)->get();
 
         $pdf = \PDF::loadView('pdf.venta',['venta'=>$venta,'detalles'=>$detalles]);
-        return $pdf->download('venta-'.$numventa[0]->num_comprobante.'.pdf');
+        return $pdf->stream('venta-'.$numventa[0]->num_comprobante.'.pdf');
 
     }
     public function store(Request $request)

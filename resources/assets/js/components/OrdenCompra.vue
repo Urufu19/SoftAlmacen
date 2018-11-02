@@ -22,7 +22,7 @@
                                       <option value="descripcion">Descripción</option>
                                     </select>
                                     <input type="text" v-model="buscar" @keyup.enter="listarOrdenCompra(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
-                                    <button type="submit" @click="listarOrdeCompra(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                    <button type="submit" @click="listarOrdenCompra(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                 </div>
                             </div>
                         </div>
@@ -228,7 +228,8 @@
                 var url= '/ordencompra?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
-                    me.arrayOrdenCompra = respuesta.ordencompra.data;
+                    console.log(response)
+                    me.arrayOrdenCompra = respuesta.ordencompras.data;
                     me.pagination= respuesta.pagination;
                 })
                 .catch(function (error) {

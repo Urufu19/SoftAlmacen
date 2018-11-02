@@ -529,6 +529,7 @@
 
                     if(me.arrayArticulo.length>0){
                         me.articulo=me.arrayArticulo[0]['nombre'];
+                        me.precio=me.arrayArticulo[0]['precio_venta'];
                         me.idarticulo=me.arrayArticulo[0]['id'];
                     }
                     else{
@@ -601,7 +602,7 @@
                     idarticulo: data['id'],
                     articulo: data['nombre'],
                     cantidad: 1,
-                    precio: 1
+                    precio: data['precio_venta']
                     });
                     }
             },
