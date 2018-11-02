@@ -12,11 +12,15 @@
   <title>Sistema Ventas - Compartiendo Códigos</title>
 
   <link href="css/plantilla.css" rel="stylesheet">
+  
+  
 
 </head>
 
-<body class="app flex-row align-items-center">
+<body class="app flex-row align-items-center" >
+
   <div class="container">
+    
     @yield('login')
   </div>
 

@@ -88,7 +88,11 @@ body {
   font-weight: normal;
   line-height: 1.5;
   color: #151b1e;
-  background-color: #e4e5e6; }
+  background: url("fondo_login.JPG")no-repeat center center fixed,rgba(25, 22, 22, 0.7);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;  }
 
 [tabindex="-1"]:focus {
   outline: none !important; }
