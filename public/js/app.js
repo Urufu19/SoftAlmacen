@@ -56551,6 +56551,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -56558,11 +56595,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             articulo_id: 0,
             idcategoria: 0,
+            idordencompra: 0,
             nombre_categoria: '',
             codigo: '',
             nombre: '',
             precio_venta: 0,
             stock: 0,
+            unidad: '',
+            marca: '',
+            modelo: '',
+            serie: '',
             descripcion: '',
             arrayArticulo: [],
             modal: 0,
@@ -56581,7 +56623,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             offset: 3,
             criterio: 'nombre',
             buscar: '',
-            arrayCategoria: []
+            arrayCategoria: [],
+            arrayOrdenCompra: []
         };
     },
 
@@ -56635,9 +56678,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var me = this;
             var url = '/categoria/selectCategoria';
             axios.get(url).then(function (response) {
-                //console.log(response);
+                console.log(response);
                 var respuesta = response.data;
                 me.arrayCategoria = respuesta.categorias;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        selectOrdenCompra: function selectOrdenCompra() {
+            var me = this;
+            var url = '/ordencompra/selectOrdenCompra';
+            axios.get(url).then(function (response) {
+                console.log(response);
+                var respuesta = response.data;
+                me.arrayOrndeCompra = respuesta.ordencompras;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -56658,9 +56712,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post('/articulo/registrar', {
                 'idcategoria': this.idcategoria,
+                'idordencompra': this.idordencompra,
                 'codigo': this.codigo,
                 'nombre': this.nombre,
                 'stock': this.stock,
+                'unidad': this.unidad,
+                'marca': this.marca,
+                'modelo': this.modelo,
+                'serie': this.serie,
                 'precio_venta': this.precio_venta,
                 'descripcion': this.descripcion
             }).then(function (response) {
@@ -56679,9 +56738,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.put('/articulo/actualizar', {
                 'idcategoria': this.idcategoria,
+                'idordencompra': this.idordencompra,
                 'codigo': this.codigo,
                 'nombre': this.nombre,
                 'stock': this.stock,
+                'unidad': this.unidad,
+                'marca': this.marca,
+                'modelo': this.modelo,
+                'serie': this.serie,
                 'precio_venta': this.precio_venta,
                 'descripcion': this.descripcion,
                 'id': this.articulo_id
@@ -56761,6 +56825,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.errorMostrarMsjArticulo = [];
 
             if (this.idcategoria == 0) this.errorMostrarMsjArticulo.push("Seleccione una categoría.");
+
             if (!this.nombre) this.errorMostrarMsjArticulo.push("El nombre del artículo no puede estar vacío.");
             if (!this.stock) this.errorMostrarMsjArticulo.push("El stock del artículo debe ser un número y no puede estar vacío.");
             if (!this.precio_venta) this.errorMostrarMsjArticulo.push("El precio venta del artículo debe ser un número y no puede estar vacío.");
@@ -56773,11 +56838,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.modal = 0;
             this.tituloModal = '';
             this.idcategoria = 0;
+            this.idordencompra = 0;
             this.nombre_categoria = '';
             this.codigo = '';
             this.nombre = '';
             this.precio_venta = 0;
             this.stock = 0;
+
+            this.marca = '';
+            this.modelo = '';
+            this.serie = '';
             this.descripcion = '';
             this.errorArticulo = 0;
         },
@@ -56793,11 +56863,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                     this.modal = 1;
                                     this.tituloModal = 'Registrar Artículo';
                                     this.idcategoria = 0;
+                                    this.idordencompra = 0;
                                     this.nombre_categoria = '';
                                     this.codigo = '';
                                     this.nombre = '';
                                     this.precio_venta = 0;
                                     this.stock = 0;
+                                    this.marca = '';
+                                    this.modelo = '';
+                                    this.serie = '';
+
                                     this.descripcion = '';
                                     this.tipoAccion = 1;
                                     break;
@@ -56810,9 +56885,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                     this.tipoAccion = 2;
                                     this.articulo_id = data['id'];
                                     this.idcategoria = data['idcategoria'];
+                                    this.idordencompra = data['idordencompra'];
                                     this.codigo = data['codigo'];
                                     this.nombre = data['nombre'];
                                     this.stock = data['stock'];
+                                    this.unidad = data['unidad'];
+                                    this.marca = data['marca'];
+                                    this.modelo = data['modelo'];
+                                    this.serie = data['serie'];
                                     this.precio_venta = data['precio_venta'];
                                     this.descripcion = data['descripcion'];
                                     break;
@@ -56821,6 +56901,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
             }
             this.selectCategoria();
+            this.selectOrdenCompra();
         }
     },
     mounted: function mounted() {
@@ -59912,7 +59993,29 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("td", {
-                      domProps: { textContent: _vm._s(articulo.descripcion) }
+                      domProps: { textContent: _vm._s(articulo.unidad) }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      domProps: { textContent: _vm._s(articulo.marca) }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      domProps: { textContent: _vm._s(articulo.modelo) }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      domProps: { textContent: _vm._s(articulo.serie) }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      domProps: {
+                        textContent: _vm._s(
+                          articulo.numero_ordencompra +
+                            " / " +
+                            articulo.fecha_ordencompra
+                        )
+                      }
                     }),
                     _vm._v(" "),
                     _c("td", [
@@ -60143,6 +60246,44 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
+                        [_vm._v("Orden de Compra")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-9" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.idordencompra,
+                              expression: "idordencompra"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            placeholder: "Nombre de artículo"
+                          },
+                          domProps: { value: _vm.idordencompra },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.idordencompra = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
                         [_vm._v("Código")]
                       ),
                       _vm._v(" "),
@@ -60307,9 +60448,65 @@ var render = function() {
                         "label",
                         {
                           staticClass: "col-md-3 form-control-label",
-                          attrs: { for: "email-input" }
+                          attrs: { for: "text-input" }
                         },
-                        [_vm._v("Descripción")]
+                        [_vm._v("Unidad")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-9" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.unidad,
+                                expression: "unidad"
+                              }
+                            ],
+                            staticClass: "form-control text-uppercase",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.unidad = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "Unidad" } }, [
+                              _vm._v("Unidad")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Kilo" } }, [
+                              _vm._v("Kilo")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Caja" } }, [
+                              _vm._v("Caja")
+                            ])
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Marca")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -60318,22 +60515,98 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.descripcion,
-                              expression: "descripcion"
+                              value: _vm.marca,
+                              expression: "marca"
                             }
                           ],
                           staticClass: "form-control",
                           attrs: {
-                            type: "email",
-                            placeholder: "Ingrese descripción"
+                            type: "text",
+                            placeholder: "Marca de artículo"
                           },
-                          domProps: { value: _vm.descripcion },
+                          domProps: { value: _vm.marca },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.descripcion = $event.target.value
+                              _vm.marca = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Modelo")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-9" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.modelo,
+                              expression: "modelo"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            placeholder: "Modelo de artículo"
+                          },
+                          domProps: { value: _vm.modelo },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.modelo = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Serie")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-9" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.serie,
+                              expression: "serie"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            placeholder: "Serie de artículo"
+                          },
+                          domProps: { value: _vm.serie },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.serie = $event.target.value
                             }
                           }
                         })
@@ -60453,7 +60726,15 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Stock")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Descripción")]),
+        _c("th", [_vm._v("Unidad")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Marca")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Modelo")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Serie")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Orden de Compra")]),
         _vm._v(" "),
         _c("th", [_vm._v("Estado")])
       ])

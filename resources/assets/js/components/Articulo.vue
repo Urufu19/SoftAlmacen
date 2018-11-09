@@ -38,7 +38,11 @@
                                     <th>Categoría</th>
                                     <th>Precio Venta</th>
                                     <th>Stock</th>
-                                    <th>Descripción</th>
+                                    <th>Unidad</th>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Serie</th>
+                                    <th>Orden de Compra</th>
                                     <th>Estado</th>
                                 </tr>
                             </thead>
@@ -64,7 +68,11 @@
                                     <td v-text="articulo.nombre_categoria"></td>
                                     <td v-text="articulo.precio_venta"></td>
                                     <td v-text="articulo.stock"></td>
-                                    <td v-text="articulo.descripcion"></td>
+                                    <td v-text="articulo.unidad"></td>
+                                    <td v-text="articulo.marca"></td>
+                                    <td v-text="articulo.modelo"></td>
+                                    <td v-text="articulo.serie"></td>
+                                    <td v-text="articulo.numero_ordencompra+' / '+articulo.fecha_ordencompra"></td>
                                     <td>
                                         <div v-if="articulo.condicion">
                                             <span class="badge badge-success">Activo</span>
@@ -116,6 +124,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="text-input">Orden de Compra</label>
+                                    <div class="col-md-9">
+                                             <input type="text" v-model="idordencompra" class="form-control" placeholder="Nombre de artículo">                                   
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Código</label>
                                     <div class="col-md-9">
                                         <input type="text" v-model="codigo" class="form-control" placeholder="Código de barras"> 
@@ -143,11 +157,34 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="email-input">Descripción</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Unidad</label>
                                     <div class="col-md-9">
-                                        <input type="email" v-model="descripcion" class="form-control" placeholder="Ingrese descripción">
+                                        <select  v-model="unidad" class="form-control text-uppercase">
+                                            <option value="Unidad">Unidad</option>
+                                            <option value="Kilo">Kilo</option>
+                                            <option value="Caja">Caja</option>
+                                        </select>                                        
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="text-input">Marca</label>
+                                    <div class="col-md-9">
+                                        <input type="text" v-model="marca" class="form-control" placeholder="Marca de artículo">                                        
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="text-input">Modelo</label>
+                                    <div class="col-md-9">
+                                        <input type="text" v-model="modelo" class="form-control" placeholder="Modelo de artículo">                                        
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="text-input">Serie</label>
+                                    <div class="col-md-9">
+                                        <input type="text" v-model="serie" class="form-control" placeholder="Serie de artículo">                                        
+                                    </div>
+                                </div>
+                                
                                 <div v-show="errorArticulo" class="form-group row div-error">
                                     <div class="text-center text-error">
                                         <div v-for="error in errorMostrarMsjArticulo" :key="error" v-text="error">
@@ -179,11 +216,16 @@
             return {
                 articulo_id: 0,
                 idcategoria : 0,
+                idordencompra : 0,
                 nombre_categoria : '',
                 codigo : '',
                 nombre : '',
                 precio_venta : 0,
                 stock : 0,
+                unidad : '',
+                marca : '',
+                modelo : '',
+                serie : '',
                 descripcion : '',
                 arrayArticulo : [],
                 modal : 0,
@@ -202,7 +244,8 @@
                 offset : 3,
                 criterio : 'nombre',
                 buscar : '',
-                arrayCategoria :[]
+                arrayCategoria :[],
+                arrayOrdenCompra :[]
             }
         },
         components: {
@@ -257,9 +300,21 @@
                 let me=this;
                 var url= '/categoria/selectCategoria';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                    console.log(response);
                     var respuesta= response.data;
                     me.arrayCategoria = respuesta.categorias;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            selectOrdenCompra(){
+                let me=this;
+                var url= '/ordencompra/selectOrdenCompra';
+                axios.get(url).then(function (response) {
+                    console.log(response);
+                    var respuesta= response.data;
+                    me.arrayOrndeCompra = respuesta.ordencompras;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -281,9 +336,14 @@
 
                 axios.post('/articulo/registrar',{
                     'idcategoria': this.idcategoria,
+                    'idordencompra': this.idordencompra,
                     'codigo': this.codigo,
                     'nombre': this.nombre,
                     'stock': this.stock,
+                    'unidad': this.unidad,
+                    'marca': this.marca,
+                    'modelo': this.modelo,
+                    'serie': this.serie,
                     'precio_venta': this.precio_venta,
                     'descripcion': this.descripcion
                 }).then(function (response) {
@@ -302,9 +362,14 @@
 
                 axios.put('/articulo/actualizar',{
                     'idcategoria': this.idcategoria,
+                    'idordencompra': this.idordencompra,
                     'codigo': this.codigo,
                     'nombre': this.nombre,
                     'stock': this.stock,
+                    'unidad': this.unidad,
+                    'marca': this.marca,
+                    'modelo': this.modelo,
+                    'serie': this.serie,
                     'precio_venta': this.precio_venta,
                     'descripcion': this.descripcion,
                     'id': this.articulo_id
@@ -398,6 +463,7 @@
                 this.errorMostrarMsjArticulo =[];
 
                 if (this.idcategoria==0) this.errorMostrarMsjArticulo.push("Seleccione una categoría.");
+                
                 if (!this.nombre) this.errorMostrarMsjArticulo.push("El nombre del artículo no puede estar vacío.");
                 if (!this.stock) this.errorMostrarMsjArticulo.push("El stock del artículo debe ser un número y no puede estar vacío.");
                 if (!this.precio_venta) this.errorMostrarMsjArticulo.push("El precio venta del artículo debe ser un número y no puede estar vacío.");
@@ -410,11 +476,16 @@
                 this.modal=0;
                 this.tituloModal='';
                 this.idcategoria= 0;
+                this.idordencompra= 0;
                 this.nombre_categoria = '';
                 this.codigo = '';
                 this.nombre = '';
                 this.precio_venta = 0;
                 this.stock = 0;
+                
+                this.marca = '';
+                this.modelo = '';
+                this.serie = '';
                 this.descripcion = '';
 		        this.errorArticulo=0;
             },
@@ -428,11 +499,16 @@
                                 this.modal = 1;
                                 this.tituloModal = 'Registrar Artículo';
                                 this.idcategoria=0;
+                                this.idordencompra=0;
                                 this.nombre_categoria='';
                                 this.codigo='';
                                 this.nombre= '';
                                 this.precio_venta=0;
                                 this.stock=0;
+                                this.marca= '';
+                                this.modelo= '';
+                                this.serie= '';
+                                
                                 this.descripcion = '';
                                 this.tipoAccion = 1;
                                 break;
@@ -445,9 +521,14 @@
                                 this.tipoAccion=2;
                                 this.articulo_id=data['id'];
                                 this.idcategoria=data['idcategoria'];
+                                this.idordencompra=data['idordencompra'];
                                 this.codigo=data['codigo'];
                                 this.nombre = data['nombre'];
                                 this.stock=data['stock'];
+                                this.unidad = data['unidad'];
+                                this.marca = data['marca'];
+                                this.modelo = data['modelo'];
+                                this.serie = data['serie'];
                                 this.precio_venta=data['precio_venta'];
                                 this.descripcion= data['descripcion'];
                                 break;
@@ -456,6 +537,7 @@
                     }
                 }
                 this.selectCategoria();
+                this.selectOrdenCompra();
             }
         },
         mounted() {

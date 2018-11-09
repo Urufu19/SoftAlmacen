@@ -44,7 +44,7 @@ class OrdenCompraController extends Controller
     public function selectOrdenCompra(Request $request){
         if (!$request->ajax()) return redirect('/');
         $ordencompras = OrdenCompra::where('condicion','=','1')
-        ->select('id','nombre')->orderBy('nombre', 'asc')->get();
+        ->select('id','numero','nombre','fecha')->orderBy('numero', 'asc')->get();
         return ['ordencompras' => $ordencompras];
     }
 

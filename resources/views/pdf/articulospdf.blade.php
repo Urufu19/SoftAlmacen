@@ -91,9 +91,14 @@
                     <th>Código</th>
                     <th>Nombre</th>
                     <th>Categoría</th>
+                    <th>Orden de Compra</th>
                     <th>Precio Venta</th>
                     <th>Stock</th>
-                    <th>Descripción</th>
+                    <th>Unidad</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Serie</th>
+                    
                     <th>Estado</th>
                 </tr>
             </thead>
@@ -102,10 +107,14 @@
                 <tr>
                     <td>{{$a->codigo}}</td>
                     <td>{{$a->nombre}}</td>
-                    <td>{{$a->categoria}}</td>
+                    <td>{{$a->nombre_categoria}}</td>
+                    <td>{{$a->numero_ordencompra.'/'.$a->fecha_ordencompra}}</td>
                     <td>{{$a->precio_venta}}</td>
                     <td>{{$a->stock}}</td>
-                    <td>{{$a->descripcion}}</td>
+                    <td>{{$a->unidad}}</td>
+                    <td>{{$a->marca}}</td>
+                    <td>{{$a->modelo}}</td>
+                    <td>{{$a->serie}}</td>
                     <td>{{$a->condicion?'Activo':'Desactivado'}}</td>
                 </tr>
                 @endforeach                               
