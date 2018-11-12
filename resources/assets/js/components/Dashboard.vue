@@ -30,7 +30,7 @@
                     <div class="col-md-6">
                         <div class="card card-chart">
                             <div class="card-header">
-                                <h4>Ventas</h4>
+                                <h4>Movimientos</h4>
                             </div>
                             <div class="card-content">
                                 <div class="ct-chart">
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <p>Ventas de los últimos meses.</p>
+                                <p>Movimientos de los últimos meses.</p>
                             </div>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                     data: {
                         labels: me.varMesVenta,
                         datasets: [{
-                            label: 'Ventas',
+                            label: 'Movimientos',
                             data: me.varTotalVenta,
                             backgroundColor: '#007bff',
                             borderColor: 'rgba(54, 162, 235, 0.2)',

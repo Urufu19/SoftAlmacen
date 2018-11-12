@@ -18,13 +18,13 @@ class ArticuloController extends Controller
         if ($buscar==''){
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
             ->join('orden_compra','articulos.idordencompra','=','orden_compra.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.unidad','articulos.marca','articulos.modelo','articulos.serie','orden_compra.numero as numero_ordencompra','orden_compra.fecha as fecha_ordencompra','articulos.condicion')
+            ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.unidad','articulos.marca','articulos.modelo','articulos.serie','orden_compra.numero as numero_ordencompra','orden_compra.fecha as fecha_ordencompra','articulos.idordencompra','articulos.condicion')
             ->orderBy('articulos.id', 'desc')->paginate(15);
         }
         else{
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
             ->join('orden_compra','articulos.idordencompra','=','orden_compra.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.unidad','articulos.marca','articulos.modelo','articulos.serie','orden_compra.numero as numero_ordencompra','orden_compra.fecha as fecha_ordencompra','articulos.condicion')
+            ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.unidad','articulos.marca','articulos.modelo','articulos.serie','orden_compra.numero as numero_ordencompra','orden_compra.fecha as fecha_ordencompra','articulos.idordencompra','articulos.condicion')
             ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('articulos.id', 'desc')->paginate(15);
         }
@@ -52,13 +52,13 @@ class ArticuloController extends Controller
         if ($buscar==''){
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
             ->join('orden_compra','articulos.idordencompra','=','orden_compra.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.unidad','articulos.marca','articulos.modelo','articulos.serie','orden_compra.numero as numero_ordencompra','orden_compra.fecha as fecha_ordencompra','articulos.condicion')
+            ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.unidad','articulos.marca','articulos.modelo','articulos.serie','orden_compra.numero as numero_ordencompra','orden_compra.fecha as fecha_ordencompra','articulos.idordencompra','articulos.condicion')
             ->orderBy('articulos.id', 'desc')->paginate(10);
         }
         else{
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
             ->join('orden_compra','articulos.idordencompra','=','orden_compra.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.unidad','articulos.marca','articulos.modelo','articulos.serie','orden_compra.numero as numero_ordencompra','orden_compra.fecha as fecha_ordencompra','articulos.condicion')
+            ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.unidad','articulos.marca','articulos.modelo','articulos.serie','orden_compra.numero as numero_ordencompra','orden_compra.fecha as fecha_ordencompra','articulos.idordencompra','articulos.condicion')
             ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('articulos.id', 'desc')->paginate(10);
         }
@@ -76,14 +76,14 @@ class ArticuloController extends Controller
         if ($buscar==''){
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
             ->join('orden_compra','articulos.idordencompra','=','orden_compra.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.unidad','articulos.marca','articulos.modelo','articulos.serie','orden_compra.numero as numero_ordencompra','orden_compra.fecha as fecha_ordencompra','articulos.condicion')
+            ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.unidad','articulos.marca','articulos.modelo','articulos.serie','orden_compra.numero as numero_ordencompra','orden_compra.fecha as fecha_ordencompra','articulos.idordencompra','articulos.condicion')
             ->where('articulos.stock','>','0')
             ->orderBy('articulos.id', 'desc')->paginate(10);
         }
         else{
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
             ->join('orden_compra','articulos.idordencompra','=','orden_compra.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.unidad','articulos.marca','articulos.modelo','articulos.serie','orden_compra.numero as numero_ordencompra','orden_compra.fecha as fecha_ordencompra','articulos.condicion')
+            ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.unidad','articulos.marca','articulos.modelo','articulos.serie','orden_compra.numero as numero_ordencompra','orden_compra.fecha as fecha_ordencompra','articulos.idordencompra','articulos.condicion')
             ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
             ->where('articulos.stock','>','0')
             ->orderBy('articulos.id', 'desc')->paginate(10);
@@ -95,7 +95,7 @@ class ArticuloController extends Controller
     public function listarPdf(){
         $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
         ->join('orden_compra','articulos.idordencompra','=','orden_compra.id')
-        ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.unidad','articulos.marca','articulos.modelo','articulos.serie','orden_compra.numero as numero_ordencompra','orden_compra.fecha as fecha_ordencompra','articulos.condicion')
+        ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.unidad','articulos.marca','articulos.modelo','articulos.serie','orden_compra.numero as numero_ordencompra','orden_compra.fecha as fecha_ordencompra','articulos.idordencompra','articulos.condicion')
         ->orderBy('articulos.nombre', 'desc')->get();
 
         $cont=Articulo::count();
@@ -125,6 +125,9 @@ class ArticuloController extends Controller
     }
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre' => 'required|unique:articulos'
+        ]);
         if (!$request->ajax()) return redirect('/');
         $articulo = new Articulo();
         $articulo->idcategoria = $request->idcategoria;

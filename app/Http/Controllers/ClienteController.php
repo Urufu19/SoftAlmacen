@@ -15,10 +15,10 @@ class ClienteController extends Controller
         $criterio = $request->criterio;
         
         if ($buscar==''){
-            $personas = Persona::orderBy('id', 'desc')->paginate(3);
+            $personas = Persona::orderBy('id', 'desc')->paginate(15);
         }
         else{
-            $personas = Persona::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(3);
+            $personas = Persona::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(15);
         }
         
 
@@ -57,6 +57,8 @@ class ClienteController extends Controller
         $persona->direccion = $request->direccion;
         $persona->telefono = $request->telefono;
         $persona->email = $request->email;
+        $persona->cargo = $request->cargo;
+        $persona->oficina = $request->oficina;
 
         $persona->save();
     }
@@ -71,6 +73,8 @@ class ClienteController extends Controller
         $persona->direccion = $request->direccion;
         $persona->telefono = $request->telefono;
         $persona->email = $request->email;
+        $persona->cargo = $request->cargo;
+        $persona->oficina = $request->oficina;
         $persona->save();
     }
 }

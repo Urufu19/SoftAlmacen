@@ -22,19 +22,30 @@ class VentaController extends Controller
         if ($buscar==''){
             $ventas = Venta::join('personas','ventas.idcliente','=','personas.id')
             ->join('users','ventas.idusuario','=','users.id')
-            ->select('ventas.id','ventas.tipo_comprobante','ventas.serie_comprobante',
-            'ventas.num_comprobante','ventas.fecha_hora','ventas.impuesto','ventas.total',
-            'ventas.estado','personas.nombre','users.usuario')
-            ->orderBy('ventas.id', 'desc')->paginate(10);
+            ->select('ventas.id','ventas.tipo_comprobante',
+            'ventas.num_comprobante','ventas.fecha_hora','ventas.asunto','ventas.total',
+            'ventas.estado','personas.nombre','personas.oficina','users.usuario')
+            ->orderBy('ventas.id', 'desc')->paginate(15);
+        }
+        elseif ($criterio=='nombre'){
+            $ventas = Venta::join('personas','ventas.idcliente','=','personas.id')
+            ->join('users','ventas.idusuario','=','users.id')
+            ->select('ventas.id','ventas.tipo_comprobante',
+            'ventas.num_comprobante','ventas.fecha_hora','ventas.asunto','ventas.total',
+            'ventas.estado','personas.nombre','personas.oficina','users.usuario')
+            ->where('personas.'.$criterio, 'like', '%'. $buscar . '%')
+           
+            ->orderBy('ventas.id', 'desc')->paginate(15);
         }
         else{
             $ventas = Venta::join('personas','ventas.idcliente','=','personas.id')
             ->join('users','ventas.idusuario','=','users.id')
-            ->select('ventas.id','ventas.tipo_comprobante','ventas.serie_comprobante',
-            'ventas.num_comprobante','ventas.fecha_hora','ventas.impuesto','ventas.total',
-            'ventas.estado','personas.nombre','users.usuario')
+            ->select('ventas.id','ventas.tipo_comprobante',
+            'ventas.num_comprobante','ventas.fecha_hora','ventas.asunto','ventas.total',
+            'ventas.estado','personas.nombre','personas.oficina','users.usuario')
             ->where('ventas.'.$criterio, 'like', '%'. $buscar . '%')
-            ->orderBy('ventas.id', 'desc')->paginate(10);
+           
+            ->orderBy('ventas.id', 'desc')->paginate(15);
         }
          
         return [
@@ -55,9 +66,9 @@ class VentaController extends Controller
         $id = $request->id;
         $venta = Venta::join('personas','ventas.idcliente','=','personas.id')
         ->join('users','ventas.idusuario','=','users.id')
-        ->select('ventas.id','ventas.tipo_comprobante','ventas.serie_comprobante',
-        'ventas.num_comprobante','ventas.fecha_hora','ventas.impuesto','ventas.total',
-        'ventas.estado','personas.nombre','users.usuario')
+        ->select('ventas.id','ventas.tipo_comprobante',
+        'ventas.num_comprobante','ventas.fecha_hora','ventas.asunto','ventas.total',
+        'ventas.estado','personas.nombre','personas.oficina','users.usuario')
         ->where('ventas.id','=',$id)
         ->orderBy('ventas.id', 'desc')->take(1)->get();
          
@@ -68,7 +79,7 @@ class VentaController extends Controller
  
         $id = $request->id;
         $detalles = DetalleVenta::join('articulos','detalle_ventas.idarticulo','=','articulos.id')
-        ->select('detalle_ventas.cantidad','detalle_ventas.precio','detalle_ventas.descuento',
+        ->select('detalle_ventas.cantidad','detalle_ventas.precio',
         'articulos.nombre as articulo')
         ->where('detalle_ventas.idventa','=',$id)
         ->orderBy('detalle_ventas.id', 'desc')->get();
@@ -78,23 +89,24 @@ class VentaController extends Controller
     public function pdf(Request $request,$id){
         $venta = Venta::join('personas','ventas.idcliente','=','personas.id')
         ->join('users','ventas.idusuario','=','users.id')
-        ->select('ventas.id','ventas.tipo_comprobante','ventas.serie_comprobante',
-        'ventas.num_comprobante','ventas.created_at','ventas.impuesto','ventas.total',
-        'ventas.estado','personas.nombre','personas.tipo_documento','personas.num_documento',
-        'personas.direccion','personas.email',
-        'personas.telefono','users.usuario')
+        ->select('ventas.id','ventas.tipo_comprobante',
+        'ventas.num_comprobante','ventas.created_at','ventas.fecha_hora','ventas.asunto','ventas.total',
+        'ventas.estado','personas.nombre','personas.cargo','personas.oficina','users.usuario')
         ->where('ventas.id','=',$id)
         ->orderBy('ventas.id','desc')->take(1)->get();
 
         $detalles = DetalleVenta::join('articulos','detalle_ventas.idarticulo','=','articulos.id')
-        ->select('detalle_ventas.cantidad','detalle_ventas.precio','detalle_ventas.descuento',
-        'articulos.nombre as articulo')
+        ->join('orden_compra','articulos.idordencompra','=','orden_compra.id')
+        ->select('detalle_ventas.cantidad','detalle_ventas.precio',
+        'articulos.nombre as articulo','articulos.marca as marca','articulos.modelo as modelo','articulos.serie as serie','articulos.unidad as unidad','orden_compra.numero as numero_ordencompra','orden_compra.fecha as fecha_ordencompra')
         ->where('detalle_ventas.idventa','=',$id)
         ->orderBy('detalle_ventas.id','desc')->get();
 
         $numventa=Venta::select('num_comprobante')->where('id',$id)->get();
+       
 
-        $pdf = \PDF::loadView('pdf.venta',['venta'=>$venta,'detalles'=>$detalles]);
+
+        $pdf = \PDF::loadView('pdf.venta',['venta'=>$venta,'detalles'=>$detalles])->setPaper('B5', 'landscape');
         return $pdf->stream('venta-'.$numventa[0]->num_comprobante.'.pdf');
 
     }
@@ -111,10 +123,13 @@ class VentaController extends Controller
             $venta->idcliente = $request->idcliente;
             $venta->idusuario = \Auth::user()->id;
             $venta->tipo_comprobante = $request->tipo_comprobante;
-            $venta->serie_comprobante = $request->serie_comprobante;
+           
             $venta->num_comprobante = $request->num_comprobante;
-            $venta->fecha_hora = $mytime->toDateString();
-            $venta->impuesto = $request->impuesto;
+
+            $venta->fecha_hora = $request->fecha_hora;
+            //$venta->fecha_hora = $mytime->toDateString();
+            $venta->asunto = $request->asunto;
+            
             $venta->total = $request->total;
             $venta->estado = 'Registrado';
             $venta->save();
@@ -129,7 +144,7 @@ class VentaController extends Controller
                 $detalle->idarticulo = $det['idarticulo'];
                 $detalle->cantidad = $det['cantidad'];
                 $detalle->precio = $det['precio'];
-                $detalle->descuento = $det['descuento'];         
+                      
                 $detalle->save();
             }          
             $fechaActual= date('Y-m-d');

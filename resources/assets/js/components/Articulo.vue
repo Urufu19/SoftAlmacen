@@ -29,6 +29,7 @@
                                 </div>
                             </div>
                         </div>
+                    <div class="table-responsive">
                         <table class="table table-bordered table-striped table-sm">
                             <thead>
                                 <tr>
@@ -85,6 +86,7 @@
                                 </tr>                                
                             </tbody>
                         </table>
+                    </div>
                         <nav>
                             <ul class="pagination">
                                 <li class="page-item" v-if="pagination.current_page > 1">
@@ -126,7 +128,10 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Orden de Compra</label>
                                     <div class="col-md-9">
-                                             <input type="text" v-model="idordencompra" class="form-control" placeholder="Nombre de artículo">                                   
+                                        <select class="form-control" v-model="idordencompra">
+                                            
+                                            <option v-for="ordencompra in arrayOrdenCompra" :key="ordencompra.id" :value="ordencompra.id" v-text="ordencompra.nombre"></option>
+                                        </select>                                        
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -314,7 +319,7 @@
                 axios.get(url).then(function (response) {
                     console.log(response);
                     var respuesta= response.data;
-                    me.arrayOrndeCompra = respuesta.ordencompras;
+                    me.arrayOrdenCompra = respuesta.ordencompras;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -350,7 +355,7 @@
                     me.cerrarModal();
                     me.listarArticulo(1,'','nombre');
                 }).catch(function (error) {
-                    console.log(error);
+                    console.error(error.data)
                 });
             },
             actualizarArticulo(){
@@ -515,7 +520,7 @@
                             }
                             case 'actualizar':
                             {
-                                //console.log(data);
+                                console.log(data);
                                 this.modal=1;
                                 this.tituloModal='Actualizar Artículo';
                                 this.tipoAccion=2;

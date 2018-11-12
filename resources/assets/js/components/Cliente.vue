@@ -35,6 +35,8 @@
                                     <th>Nombre</th>
                                     <th>Tipo Documento</th>
                                     <th>Número</th>
+                                    <th>Cargo</th>
+                                    <th>Oficina</th>
                                     <th>Dirección</th>
                                     <th>Teléfono</th>
                                     <th>Email</th>
@@ -50,6 +52,8 @@
                                     <td v-text="persona.nombre"></td>
                                     <td v-text="persona.tipo_documento"></td>
                                     <td v-text="persona.num_documento"></td>
+                                    <td v-text="persona.cargo"></td>
+                                    <td v-text="persona.oficina"></td>
                                     <td v-text="persona.direccion"></td>
                                     <td v-text="persona.telefono"></td>
                                     <td v-text="persona.email"></td>
@@ -108,6 +112,35 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="text-input">Cargo</label>
+                                    <div class="col-md-9">
+                                        <input type="text" v-model="cargo" class="form-control" placeholder="Cargo">                                        
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="text-input">Oficina</label>
+                                    <div class="col-md-9">
+                                        <select v-model="oficina" class="form-control">
+                                            <option value="Dirección">Dirección</option>
+                                            <option value="Unidad Academica">Unidad Academica</option>
+                                            <option value="Administración">Administración</option>
+                                            <option value="Área de Producción">Área de Producción</option>
+                                            <option value="Área de Personal">Área de Personal</option>
+                                            <option value="Área de Abastecimiento">Área de Abastecimiento</option>
+                                            <option value="Área de Control Patrimonial">Área de Control Patrimonial</option>
+                                            <option value="Área de Secretaria Academica">Área de Secretaria Academica</option>
+                                            <option value="Almacen">Almacen</option>
+                                            <option value="Biblioteca">Biblioteca</option>
+                                            <option value="Producción Agropecuaria">Producción Agropecuaria</option>
+                                            <option value="Construcción Civil">Construcción Civil</option>
+                                            <option value="Contabilidad">Contabilidad</option>
+                                            <option value="Computación e Informatica">Computación e Informatica</option>
+                                            <option value="Enfermería Técnica">Enfermería Técnica</option>
+                                            <option value="Guía Oficial de Turismo">Guía Oficial de Turismo</option>
+                                        </select>                                    
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="email-input">Dirección</label>
                                     <div class="col-md-9">
                                         <input type="text" v-model="direccion" class="form-control" placeholder="Dirección">
@@ -157,6 +190,8 @@
                 nombre : '',
                 tipo_documento : 'DNI',
                 num_documento : '',
+                cargo : '',
+                oficina : 'Seleccione',
                 direccion : '',
                 telefono : '',
                 email : '',
@@ -239,6 +274,8 @@
                     'nombre': this.nombre,
                     'tipo_documento': this.tipo_documento,
                     'num_documento' : this.num_documento,
+                    'cargo' : this.cargo,
+                    'oficina' : this.oficina,
                     'direccion' : this.direccion,
                     'telefono' : this.telefono,
                     'email' : this.email
@@ -260,6 +297,8 @@
                     'nombre': this.nombre,
                     'tipo_documento': this.tipo_documento,
                     'num_documento' : this.num_documento,
+                    'cargo' : this.cargo,
+                    'oficina' : this.oficina,
                     'direccion' : this.direccion,
                     'telefono' : this.telefono,
                     'email' : this.email,
@@ -287,6 +326,8 @@
                 this.nombre='';
                 this.tipo_documento='DNI';
                 this.num_documento='';
+                this.cargo='';
+                this.oficina='Seleccione';
                 this.direccion='';
                 this.telefono='';
                 this.email='';
@@ -305,6 +346,8 @@
                                 this.nombre= '';
                                 this.tipo_documento='DNI';
                                 this.num_documento='';
+                                this.cargo='';
+                                this.oficina='Seleccione';
                                 this.direccion='';
                                 this.telefono='';
                                 this.email='';
@@ -321,6 +364,8 @@
                                 this.nombre = data['nombre'];
                                 this.tipo_documento = data['tipo_documento'];
                                 this.num_documento = data['num_documento'];
+                                this.cargo = data['cargo'];
+                                this.oficina = data['oficina'];
                                 this.direccion = data['direccion'];
                                 this.telefono = data['telefono'];
                                 this.email = data['email'];

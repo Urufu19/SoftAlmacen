@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Sistema Ventas Laravel Vue Js- Compartiendocodigos">
-    <meta name="author" content="compartiendocodigos.net">
-    <meta name="keyword" content="Sistema ventas Laravel Vue Js, Sistema compras Laravel Vue Js">
+    <meta name="description" content="Sistema de Almacen del Instituto Victor Alvarez Huapaya">
+    <meta name="author" content="Urufu">
+    <meta name="keyword" content="Sistema de Almacen del Instituto Victor Alvarez Huapaya">
     <link rel="shortcut icon" href="img/favicon.png">
     <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : ''}}">
-    <title>Sis Almacen</title>
+    <title>SYS Almacen</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js">
     <!-- Icons -->
